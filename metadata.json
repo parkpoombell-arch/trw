@@ -1,0 +1,6 @@
+{
+  "name": "ระบบเช็กชื่อและติดตามการเข้าเรียนของนักเรียน",
+  "description": "ระบบเช็กชื่อและบันทึกการเข้าเรียนสำหรับสถานศึกษา บันทึกสถานะ มาเรียน มาสาย ขาดเรียน ดูสถิติและประวัติย้อนหลัง",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,121 @@
+{
+  "entities": {
+    "user": {
+      "title": "User",
+      "description": "User profile with role (admin, teacher)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "teacher"] },
+        "email": { "type": "string" },
+        "position": { "type": "string" }
+      },
+      "required": ["username", "name", "role"]
+    },
+    "classroom": {
+      "title": "Classroom",
+      "description": "Classroom details and assigned teacher",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "grade": { "type": "string" },
+        "room": { "type": "string" },
+        "roomName": { "type": "string" },
+        "academicYearId": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "teacherName": { "type": "string" },
+        "maxCapacity": { "type": "number" }
+      },
+      "required": ["grade", "room", "roomName"]
+    },
+    "student": {
+      "title": "Student",
+      "description": "Student record in a classroom",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentNumber": { "type": "number" },
+        "studentCode": { "type": "string" },
+        "prefix": { "type": "string" },
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "gender": { "type": "string" },
+        "classroomId": { "type": "string" },
+        "academicYearId": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["studentNumber", "studentCode", "firstName", "lastName", "classroomId"]
+    },
+    "attendanceRecord": {
+      "title": "AttendanceRecord",
+      "description": "Daily attendance status of a student",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "classroomId": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string", "enum": ["present", "late", "absent"] },
+        "note": { "type": "string" },
+        "recordedBy": { "type": "string" },
+        "recordedByName": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["studentId", "classroomId", "date", "status"]
+    },
+    "academicYear": {
+      "title": "AcademicYear",
+      "description": "Academic year information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "year": { "type": "string" },
+        "term": { "type": "string" },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["year", "isActive"]
+    },
+    "schoolInfo": {
+      "title": "SchoolInfo",
+      "description": "School contact and general settings",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "subName": { "type": "string" },
+        "code": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" }
+      },
+      "required": ["name"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/user" },
+      "description": "User profiles"
+    },
+    "/classrooms/{classroomId}": {
+      "schema": { "$ref": "#/entities/classroom" },
+      "description": "School classrooms"
+    },
+    "/students/{studentId}": {
+      "schema": { "$ref": "#/entities/student" },
+      "description": "Students list"
+    },
+    "/attendanceRecords/{recordId}": {
+      "schema": { "$ref": "#/entities/attendanceRecord" },
+      "description": "Attendance records per student per day"
+    },
+    "/academicYears/{yearId}": {
+      "schema": { "$ref": "#/entities/academicYear" },
+      "description": "Academic years"
+    },
+    "/schoolInfo/{docId}": {
+      "schema": { "$ref": "#/entities/schoolInfo" },
+      "description": "School metadata"
+    }
+  }
+}
